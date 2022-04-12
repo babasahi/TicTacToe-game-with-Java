@@ -1,3 +1,3 @@
-# TicTacToe-gameWithJava
+# TicTacToe-Java
 
-simple tic tac toe game with java
+simple tic tac toe game with java.
