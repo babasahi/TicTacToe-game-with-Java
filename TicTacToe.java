@@ -73,6 +73,10 @@ class Game {
 		return board;
 	}
 
+	public void setBoard(int[] newBoard) {
+		board = newBoard;
+	}
+
 	public void initBoard() {
 
 		for (int i = 0; i < board.length; i++) {
