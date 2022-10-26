@@ -1,36 +1,43 @@
 
 import java.util.Scanner;
-import java.lang.*;
 
 public class TicTacToe {
 
 	static Scanner scanner = new Scanner(System.in);
 
 	public static void main(String[] args) {
+		Game game = new Game();
+		int turn = 0;
+		int index = 0;
+		BoardTable board = new BoardTable();
+		game.initBoard();
+		board.printBoard(game.getBoard());
 
-		Game.initBoard();
-		Game.System.out.print("Which you would like to start with X or O ? :");
+		System.out.print("Which you would like to start with X or O ? :");
 		char choice = scanner.next().charAt(0);
 
-		if (choice == 'X') {
-			while (playNumber < 9 && !finisher) {
-
-				BoardPrinter(PositionFinder(), X);
-				BoardPrinter(PositionFinder(), O);
-
+		while (game.checkGameStatus() == gameStatus.playing) {
+			if (turn % 2 == 0) {
+				System.out.println("X Choose position:");
+				index = scanner.nextInt();
+				game.play(index, 1);
+				board.printBoard(game.getBoard());
+				turn++;
+			} else {
+				System.out.println("O Choose position:");
+				index = scanner.nextInt();
+				game.play(index, 1);
+				board.printBoard(game.getBoard());
+				turn++;
 			}
-			System.out.println("End Game !");
-		} else if (choice == 'O') {
-			while (playNumber < 9 && !finisher) {
 
-				BoardPrinter(PositionFinder(), O);
-				BoardPrinter(PositionFinder(), X);
-
-			}
-			System.out.println("End Game !");
+		}
+		if (game.checkGameStatus() == gameStatus.even) {
+			System.out.println("Even !!");
+		} else if (game.checkGameStatus() == gameStatus.xWin) {
+			System.out.println("X won !!");
 		} else {
-			System.out.println("Invalid inputs !, Please enter X or O ");
-
+			System.out.println("O Won");
 		}
 	}
 

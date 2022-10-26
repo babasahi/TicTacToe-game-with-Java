@@ -1,6 +1,6 @@
 public class BoardTable {
 
-	static void printBoard(int[] board) {
+	public void printBoard(int[] board) {
 		System.out.println(
 				"     " + numToSymbol(board[0]) + " | " + numToSymbol(board[1]) + " | " + numToSymbol(board[2]));
 		System.out.println("    " + "---+---+---");
@@ -12,7 +12,7 @@ public class BoardTable {
 
 	}
 
-	static String numToSymbol(int num) {
+	private String numToSymbol(int num) {
 		if (num == -1) {
 			return "O";
 		} else if (num == 1) {

@@ -10,6 +10,10 @@ public class Game {
 
 	private static int[] board = new int[9];
 
+	public int[] getBoard() {
+		return board;
+	}
+
 	public void initBoard() {
 
 		for (int i = 0; i < board.length; i++) {
@@ -24,7 +28,7 @@ public class Game {
 
 	}
 
-	static gameStatus checkGameStatus() {
+	public gameStatus checkGameStatus() {
 		int playedCount = 0;
 		for (int i = 0; i < board.length; i++) {
 			if (board[i] != 0) {
