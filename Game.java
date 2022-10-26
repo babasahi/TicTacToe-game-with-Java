@@ -10,14 +10,14 @@ public class Game {
 
 	private static int[] board = new int[9];
 
-	public static void initBoard() {
+	public void initBoard() {
 
 		for (int i = 0; i < board.length; i++) {
 			board[i] = 0;
 		}
 	}
 
-	public static void play(int indenum, int play) {
+	public void play(int indenum, int play) {
 		if (play != 0) {
 			board[indenum] = play;
 		}
