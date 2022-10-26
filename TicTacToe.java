@@ -1,14 +1,13 @@
 
 import java.util.Scanner;
 
-enum gameStatus {
-	playing,
-	even,
-	xWin,
-	oWIn,
-}
-
 public class TicTacToe {
+	enum gameStatus {
+		playing,
+		even,
+		xWin,
+		oWIn,
+	}
 
 	static Scanner scanner = new Scanner(System.in);
 
@@ -19,29 +18,45 @@ public class TicTacToe {
 		BoardTable board = new BoardTable();
 		game.initBoard();
 		board.printBoard(game.getBoard());
+		int firstPlay = 0;
 
-		System.out.print("Which you would like to start with X or O ? :");
-		char choice = scanner.next().charAt(0);
+		System.out.println("Start with X :");
 
-		while (game.checkGameStatus() == gameStatus.playing) {
+		while (game.checkGameStatus() == 'p') {
 			if (turn % 2 == 0) {
-				System.out.println("X Choose position:");
-				index = scanner.nextInt();
-				game.play(index, 1);
-				board.printBoard(game.getBoard());
-				turn++;
+				if (firstPlay == 0) {
+					System.out.println("X Choose position:");
+					index = scanner.nextInt();
+					game.play(index, 1);
+					firstPlay = 1;
+					board.printBoard(game.getBoard());
+					turn++;
+				} else {
+					do {
+						System.out.println("X Choose position:");
+						index = scanner.nextInt();
+					} while (game.getBoard()[index] != 0);
+					game.play(index, 1);
+					firstPlay = 1;
+					board.printBoard(game.getBoard());
+					turn++;
+				}
+
 			} else {
-				System.out.println("O Choose position:");
-				index = scanner.nextInt();
-				game.play(index, 1);
+				do {
+					System.out.println("O Choose position:");
+					index = scanner.nextInt();
+				} while (game.getBoard()[index] != 0);
+				game.play(index, -1);
+				firstPlay = 1;
 				board.printBoard(game.getBoard());
 				turn++;
 			}
 
 		}
-		if (game.checkGameStatus() == gameStatus.even) {
+		if (game.checkGameStatus() == 'e') {
 			System.out.println("Even !!");
-		} else if (game.checkGameStatus() == gameStatus.xWin) {
+		} else if (game.checkGameStatus() == 'x') {
 			System.out.println("X won !!");
 		} else {
 			System.out.println("O Won");
@@ -72,7 +87,7 @@ class Game {
 
 	}
 
-	public gameStatus checkGameStatus() {
+	public char checkGameStatus() {
 		int playedCount = 0;
 		for (int i = 0; i < board.length; i++) {
 			if (board[i] != 0) {
@@ -80,14 +95,14 @@ class Game {
 			}
 		}
 		if (playedCount < 5) {
-			return gameStatus.playing;
+			return 'p';
 		} else if (playedCount == 9) {
-			return gameStatus.even;
+			return 'e';
 		} else {
 			if (lookForWin(-1)) {
-				return gameStatus.oWIn;
+				return 'o';
 			} else {
-				return gameStatus.xWin;
+				return 'x';
 			}
 		}
 
@@ -120,14 +135,21 @@ class Game {
 class BoardTable {
 
 	public void printBoard(int[] board) {
+		System.out.println("");
+		System.out.println("");
 		System.out.println(
-				"     " + numToSymbol(board[0]) + " | " + numToSymbol(board[1]) + " | " + numToSymbol(board[2]));
-		System.out.println("    " + "---+---+---");
+				"     " + numToSymbol(board[0]) + "  |  " + numToSymbol(board[1]) + "  | "
+						+ numToSymbol(board[2]));
+		System.out.println("    " + "_______________");
 		System.out.println(
-				"     " + numToSymbol(board[3]) + " | " + numToSymbol(board[4]) + " | " + numToSymbol(board[5]));
-		System.out.println("    " + "---+---+---");
+				"     " + numToSymbol(board[3]) + "  |  " + numToSymbol(board[4]) + "  | "
+						+ numToSymbol(board[5]));
+		System.out.println("    " + "_______________");
 		System.out.println(
-				"     " + numToSymbol(board[6]) + " | " + numToSymbol(board[7]) + " | " + numToSymbol(board[8]));
+				"     " + numToSymbol(board[6]) + "  |  " + numToSymbol(board[7]) + "  | "
+						+ numToSymbol(board[8]));
+		System.out.println("");
+		System.out.println("");
 
 	}
 
@@ -137,7 +159,7 @@ class BoardTable {
 		} else if (num == 1) {
 			return "X";
 		} else {
-			return "";
+			return " ";
 		}
 	}
 }
