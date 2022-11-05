@@ -1,3 +1,5 @@
+package socketsgame;
+
 public class NetworkHandler {
 
 	public void sendNewBoard(int[] newBoard) {
