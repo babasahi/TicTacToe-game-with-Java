@@ -1,5 +1,7 @@
 package socketsgame;
 
+import java.util.Scanner;
+
 public class GameLogic {
 
 	public int[] board = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -86,6 +88,70 @@ public class GameLogic {
 			return "E";
 		}
 		return "p";
+	}
+
+	public void startGame() {
+		int firstPlay = 0;
+		int turn = 0;
+		int index = 0;
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Start with X :");
+
+		while (gameStatus() == "p") {
+
+			if (turn % 2 == 0) {
+				if (firstPlay == 0) {
+					System.out.println("X Choose position:");
+					index = scanner.nextInt();
+					play(index, 1);
+					firstPlay = 1;
+					printBoard(board);
+					turn++;
+					if (gameStatus() == "E") {
+						System.out.println("Even !!");
+					} else if (gameStatus() == "X") {
+						System.out.println("X won !!");
+					} else if (gameStatus() == "O") {
+						System.out.println("O Won");
+					}
+				} else {
+					do {
+						System.out.println("X Choose position:");
+						index = scanner.nextInt();
+					} while (board[index] != 0);
+					play(index, 1);
+					firstPlay = 1;
+					printBoard(board);
+					turn++;
+					if (gameStatus() == "E") {
+						System.out.println("Even !!");
+					} else if (gameStatus() == "X") {
+						System.out.println("X won !!");
+					} else if (gameStatus() == "O") {
+						System.out.println("O Won");
+					}
+				}
+
+			} else {
+				do {
+					System.out.println("O Choose position:");
+					index = scanner.nextInt();
+				} while (board[index] != 0);
+				play(index, -1);
+				firstPlay = 1;
+				GameLogic.printBoard(board);
+				turn++;
+				if (gameStatus() == "E") {
+					System.out.println("Even !!");
+				} else if (gameStatus() == "X") {
+					System.out.println("X won !!");
+				} else if (gameStatus() == "O") {
+					System.out.println("O Won");
+				}
+			}
+
+		}
+
 	}
 
 	public static void main(String[] args) {
