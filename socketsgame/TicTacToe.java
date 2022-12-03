@@ -23,7 +23,7 @@ public class TicTacToe {
 					index = scanner.nextInt();
 					game.play(index, 1);
 					firstPlay = 1;
-					printBoard(game.board);
+					GameLogic.printBoard(game.board);
 					turn++;
 					if (game.gameStatus() == "E") {
 						System.out.println("Even !!");
@@ -39,7 +39,7 @@ public class TicTacToe {
 					} while (game.board[index] != 0);
 					game.play(index, 1);
 					firstPlay = 1;
-					printBoard(game.board);
+					GameLogic.printBoard(game.board);
 					turn++;
 					if (game.gameStatus() == "E") {
 						System.out.println("Even !!");
@@ -57,7 +57,7 @@ public class TicTacToe {
 				} while (game.board[index] != 0);
 				game.play(index, -1);
 				firstPlay = 1;
-				printBoard(game.board);
+				GameLogic.printBoard(game.board);
 				turn++;
 				if (game.gameStatus() == "E") {
 					System.out.println("Even !!");
